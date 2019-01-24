@@ -1,0 +1,40 @@
+{
+  "name": "dash-diet-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd backend && node server.js",
+    "heroku-postbuild": "cd frontend && npm install && npm run build",
+    "start:server": "cd backend && nodemon server.js --exec babel-node",
+    "start:frontend": "cd frontend && npm start",
+    "start:dev": "concurrently \"npm run-script start:server\" \"npm run-script start:frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanmfox/dash-diet-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanmfox/dash-diet-tracker/issues"
+  },
+  "homepage": "https://github.com/seanmfox/dash-diet-tracker#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.3",
+    "concurrently": "^4.1.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.5",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.0",
+    "nodemon": "^1.18.9"
+  }
+}
