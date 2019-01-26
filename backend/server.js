@@ -50,7 +50,9 @@ router.post("/usersignin/", (req, res) => {
             userId: doc._id,
             fname: doc.fname,
             lname: doc.lname,
-            email: doc.email
+            email: doc.email,
+            food: doc.food,
+            exercise: doc.exercise
           },
           process.env.SECRET_KEY
         ),
@@ -58,14 +60,16 @@ router.post("/usersignin/", (req, res) => {
         userId: doc._id,
         fname: doc.fname,
         lname: doc.lname,
-        email: doc.email
+        email: doc.email,
+        food: doc.food,
+        exercise: doc.exercise
       });
     });
   });
 });
 
 //Authenticate user if already signed in
-router.get("/authenticateuser", (req, res) => {
+router.get("/authuser", (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
   jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
     User.findById(decoded.userId, (err, user) => {
@@ -75,7 +79,9 @@ router.get("/authenticateuser", (req, res) => {
         userId: user._id,
         fname: user.fname,
         lname: user.lname,
-        email: user.email
+        email: user.email,
+        food: user.food,
+        exercise: user.exercise
       });
     });
   });

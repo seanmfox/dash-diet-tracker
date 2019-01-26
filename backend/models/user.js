@@ -7,6 +7,8 @@ const UserSchema = new Schema (
     lname: String,
     email: {type: String, sparse: true, lowercase: true},
     password: {type: String },
+    food: [{}],
+    exercise: [{}]
   },
   { timestamps: true }
 );

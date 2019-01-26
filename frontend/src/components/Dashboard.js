@@ -1,11 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import FoodForm from './FoodForm';
+import { UserConsumer } from './Context';
 
-export default class Dashboard extends Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    )
-  }
+class Dashboard extends Component {
+	render() {
+		return (
+			<UserConsumer>
+				{({  user, weekStart  }) => (
+					<div>
+						<FoodForm user={user}/>
+					</div>
+				)}
+			</UserConsumer>
+		);
+	}
 }
+
+export default Dashboard;
