@@ -8,25 +8,31 @@ export const UserConsumer = UserContext.Consumer;
 class UserProvider extends Component {
 	state = {
 		user: '',
-		weekStart: '',
+		dayView: '',
 		signOut: () => this.signOut(),
-		setUser: user => this.setUser(user)
+		setUser: user => this.setUser(user),
+		changeDay: e => this.changeDay(e)
 	};
 
 	componentDidMount = () => {
 		if (localStorage.getItem('JWT')) {
 			this.authUser();
 		}
-		this.setCurrentWeek();
+		this.setCurrentDay();
 	};
 
-	setCurrentWeek = () => {
+	changeDay = e => {
+		const change = e.target.value;
+		const changeType = change === 'forward' ? 86400000 : -86400000;
+		this.setState(prevState => ({
+			dayView: prevState.dayView + Number(changeType)
+		}));
+	}
+
+	setCurrentDay = () => {
 		const currentDate = new Date(Date.now());
-		const weekBeginningDate =
-			currentDate.getUTCDate() - currentDate.getUTCDay();
-		const startOfDay = new Date(currentDate.setUTCDate(weekBeginningDate));
-		startOfDay.setUTCHours(0, 0, 0, 0);
-		this.setState({ weekStart: startOfDay.valueOf() });
+		const startOfDay = currentDate.setUTCHours(0, 0, 0, 0);
+		this.setState({ dayView: startOfDay.valueOf() });
 	};
 
 	setUser = user => {
@@ -34,9 +40,9 @@ class UserProvider extends Component {
 	};
 
 	async authUser() {
-		const user = await authenticateUser();
-		if (user.success) {
-			this.setUser(user);
+		const res = await authenticateUser();
+		if (res.success) {
+			this.setUser(res.user);
 		}
 	}
 

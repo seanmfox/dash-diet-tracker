@@ -4,19 +4,20 @@ import { UserConsumer } from './Context';
 
 class Dashboard extends Component {
 	dailyFoodData = (user, time) => {
-		const foodData = user.food.filter(log => log.day === time);
+		const foodData = user.food.filter(log => new Date(log.recordDate).toUTCString() === new Date(time).toUTCString());
 		if (foodData.length === 0) {
 			return [
 				{
-					trackDate: Date.now(),
-					grain: 5,
+					trackDate: time,
+					grain: 0,
 					wholeGrain: 0,
 					fruit: 0,
 					veggies: 0,
 					dairy: 0,
 					meats: 0,
 					seedsLegumes: 0,
-					fatsSweets: 0
+					fatsSweets: 0,
+					newRecord: true
 				}
 			];
 		} else {
@@ -27,11 +28,13 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<UserConsumer>
-				{({ user, weekStart }) => (
+				{({ user, dayView, changeDay, setUser }) => (
 					<div>
-						<p>{new Date(weekStart).toUTCString()}</p>
-						{this.dailyFoodData(user, weekStart).map(set => (
-							<FoodForm user={user} key={set.trackDate} set={set} />
+						<button value='back' onClick={changeDay}>Past Date</button>
+						<button value='forward' onClick={changeDay}>Future Date</button>
+						<p>{new Date(dayView).toUTCString()}</p>
+						{this.dailyFoodData(user, dayView).map(set => (
+							<FoodForm user={user} setUser={setUser} key={dayView} set={set} />
 						))}
 					</div>
 				)}

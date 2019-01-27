@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FoodItem from './FoodItem';
+import { createFoodRecord, updateFoodRecord } from '../lib/DBAPI';
 
 class FoodForm extends Component {
 	state = {
@@ -36,6 +37,30 @@ class FoodForm extends Component {
 		}));
 	};
 
+	saveData = () => {
+		if (this.props.set.newRecord) {
+			this.addNewRecord(
+				this.props.user.userId,
+				this.state,
+				this.props.set.trackDate
+			);
+		} else {
+			this.updateRecord(this.props.user.userId, this.props.set._id, this.state);
+		}
+	};
+
+	async addNewRecord(userId, state, trackDate) {
+		const res = await createFoodRecord(userId, state, trackDate);
+		console.log(res);
+		console.log(this.props);
+		this.props.setUser(res.user);
+	}
+
+	async updateRecord(userId, recordId, foodData) {
+		const res = await updateFoodRecord(userId, recordId, foodData);
+		this.props.setUser(res.user);
+	}
+
 	render() {
 		const categoryChoices = Object.keys(this.state);
 		return (
@@ -48,6 +73,7 @@ class FoodForm extends Component {
 						categoryValue={this.state[category]}
 					/>
 				))}
+				<button onClick={this.saveData}>Save Groups</button>
 			</div>
 		);
 	}

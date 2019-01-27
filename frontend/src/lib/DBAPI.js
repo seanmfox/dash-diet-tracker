@@ -23,3 +23,25 @@ export async function authenticateUser() {
 		}
 	}).then(res => res.json());
 }
+
+export async function createFoodRecord(userId, foodData, trackDate) {
+	return fetch(`/api/users/${userId}/food`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('JWT')}`
+		},
+		body: JSON.stringify({ foodData, trackDate })
+	}).then(res => res.json())
+}
+
+export async function updateFoodRecord(userId, foodRecordID, foodData) {
+	return fetch(`/api/users/${userId}/food/${foodRecordID}`, {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('JWT')}`
+		},
+		body: JSON.stringify({ foodData })
+	}).then(res => res.json())
+}

@@ -20,10 +20,10 @@ class SignIn extends Component {
 	};
 
 	async userSignIn(email, password) {
-		const userLogIn = await signinUser(email, password);
-		if (userLogIn.success) {
-			localStorage.JWT = userLogIn.token;
-			this.props.setUser(userLogIn);
+		const res = await signinUser(email, password);
+		if (res.success) {
+			localStorage.JWT = res.token;
+			this.props.setUser(res.user);
 		}
 	}
 
