@@ -4,7 +4,10 @@ import { UserConsumer } from './Context';
 
 class Dashboard extends Component {
 	dailyFoodData = (user, time) => {
-		const foodData = user.food.filter(log => new Date(log.recordDate).toUTCString() === new Date(time).toUTCString());
+		const foodData = user.food.filter(
+			log =>
+				new Date(log.recordDate).toUTCString() === new Date(time).toUTCString()
+		);
 		if (foodData.length === 0) {
 			return [
 				{
@@ -28,13 +31,35 @@ class Dashboard extends Component {
 	render() {
 		return (
 			<UserConsumer>
-				{({ user, dayView, changeDay, setUser }) => (
+				{({
+					user,
+					dayView,
+					changeDay,
+					setUser,
+					unsavedChanges,
+					changeMade,
+					changeSaved
+				}) => (
 					<div>
-						<button value='back' onClick={changeDay}>Past Date</button>
-						<button value='forward' onClick={changeDay}>Future Date</button>
+						{unsavedChanges && (
+							<p>You have unsaved changes to your daily counts</p>
+						)}
+						<button value='back' onClick={changeDay}>
+							Past Date
+						</button>
+						<button value='forward' onClick={changeDay}>
+							Future Date
+						</button>
 						<p>{new Date(dayView).toUTCString()}</p>
 						{this.dailyFoodData(user, dayView).map(set => (
-							<FoodForm user={user} setUser={setUser} key={dayView} set={set} />
+							<FoodForm
+								user={user}
+								setUser={setUser}
+								key={dayView}
+								set={set}
+								changeMade={changeMade}
+								changeSaved={changeSaved}
+							/>
 						))}
 					</div>
 				)}

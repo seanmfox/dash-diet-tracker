@@ -35,9 +35,11 @@ class FoodForm extends Component {
 		this.setState(prevState => ({
 			[selectedCategory]: prevState[selectedCategory] + Number([changeType])
 		}));
+		this.props.changeMade();
 	};
 
 	saveData = () => {
+		this.props.changeSaved();
 		if (this.props.set.newRecord) {
 			this.addNewRecord(
 				this.props.user.userId,
@@ -51,8 +53,6 @@ class FoodForm extends Component {
 
 	async addNewRecord(userId, state, trackDate) {
 		const res = await createFoodRecord(userId, state, trackDate);
-		console.log(res);
-		console.log(this.props);
 		this.props.setUser(res.user);
 	}
 

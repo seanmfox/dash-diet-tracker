@@ -9,9 +9,12 @@ class UserProvider extends Component {
 	state = {
 		user: '',
 		dayView: '',
+		unsavedChanges: false,
 		signOut: () => this.signOut(),
 		setUser: user => this.setUser(user),
-		changeDay: e => this.changeDay(e)
+		changeDay: e => this.changeDay(e),
+		changeMade: () => this.changeMade(),
+		changeSaved: () => this.changeSaved()
 	};
 
 	componentDidMount = () => {
@@ -21,13 +24,21 @@ class UserProvider extends Component {
 		this.setCurrentDay();
 	};
 
+	changeMade = () => {
+		this.setState({ unsavedChanges: true });
+	};
+
+	changeSaved = () => {
+		this.setState({ unsavedChanges: false });
+	};
+
 	changeDay = e => {
 		const change = e.target.value;
 		const changeType = change === 'forward' ? 86400000 : -86400000;
 		this.setState(prevState => ({
-			dayView: prevState.dayView + Number(changeType)
+			dayView: prevState.dayView + Number(changeType), unsavedChanges: false
 		}));
-	}
+	};
 
 	setCurrentDay = () => {
 		const currentDate = new Date(Date.now());
