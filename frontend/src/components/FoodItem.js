@@ -8,8 +8,8 @@ class FoodItem extends Component {
 			<div>
 				<p>{categoryName}</p>
 				<p>{categoryValue}</p>
-        <button value={`${categoryName}-increment`} onClick={this.props.adjust}>Go up</button>
-        <button value={`${categoryName}-decrement`} onClick={this.props.adjust}>Go down</button>
+        <button value={`${categoryName}-decrement`} onClick={this.props.adjust}>-</button>
+        <button value={`${categoryName}-increment`} onClick={this.props.adjust}>+</button>
 			</div>
 		);
 	}
