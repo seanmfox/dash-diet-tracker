@@ -65,14 +65,23 @@ class FoodForm extends Component {
 		const categoryChoices = Object.keys(this.state);
 		return (
 			<div>
-				{categoryChoices.map(category => (
-					<FoodItem
-						adjust={this.changeCount}
-						key={category}
-						categoryName={category}
-						categoryValue={this.state[category]}
-					/>
-				))}
+				<table>
+          <tbody>
+					<tr>
+						<th>Food Type</th>
+						<th>Goal</th>
+						<th>Count</th>
+					</tr>
+					{categoryChoices.map(category => (
+						<FoodItem
+							adjust={this.changeCount}
+							key={category}
+							categoryName={category}
+							categoryValue={this.state[category]}
+						/>
+          ))}
+          </tbody>
+				</table>
 				<button onClick={this.saveData}>Save Groups</button>
 			</div>
 		);

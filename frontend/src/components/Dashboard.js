@@ -50,7 +50,13 @@ class Dashboard extends Component {
 						<button value='forward' onClick={changeDay}>
 							Future Date
 						</button>
-						<p>{new Date(dayView).toUTCString()}</p>
+						<h2>
+							{new Date(dayView).toLocaleDateString('en-US', {
+								timeZone: 'UTC',
+								month: 'long',
+								day: 'numeric'
+							})}
+						</h2>
 						{this.dailyFoodData(user, dayView).map(set => (
 							<FoodForm
 								user={user}
