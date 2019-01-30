@@ -31,7 +31,7 @@ class FoodForm extends Component {
 		const changeArray = e.target.value.split('-');
 		const selectedCategory = changeArray[0];
 		const selectedChange = changeArray[1];
-		const changeType = selectedChange === 'increment' ? 1 : -1;
+		const changeType = selectedChange === 'increment' ? .5 : -.5;
 		this.setState(prevState => ({
 			[selectedCategory]: prevState[selectedCategory] + Number([changeType])
 		}));

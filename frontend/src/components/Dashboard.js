@@ -42,7 +42,7 @@ class Dashboard extends Component {
 				}) => (
 					<div>
 						{unsavedChanges && (
-							<p>You have unsaved changes to your daily counts</p>
+							<p className={unsavedChanges ? null : 'no-new-data'}>You have unsaved changes to your daily counts</p>
 						)}
 						<button value='back' onClick={changeDay}>
 							Past Date
@@ -53,6 +53,7 @@ class Dashboard extends Component {
 						<h2>
 							{new Date(dayView).toLocaleDateString('en-US', {
 								timeZone: 'UTC',
+								weekday: 'long',
 								month: 'long',
 								day: 'numeric'
 							})}

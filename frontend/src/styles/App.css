@@ -11,3 +11,7 @@ table {
   color: green;
   font-weight: 700;
 }
+
+.no-new-data {
+  visibility: hidden;
+}
