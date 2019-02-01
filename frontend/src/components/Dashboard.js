@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FoodForm from './FoodForm';
 import { UserConsumer } from './Context';
+import Activities from './Activities';
 
 class Dashboard extends Component {
 	dailyFoodData = (user, time) => {
@@ -41,9 +42,6 @@ class Dashboard extends Component {
 					changeSaved
 				}) => (
 					<div>
-						{unsavedChanges && (
-							<p className={unsavedChanges ? null : 'no-new-data'}>You have unsaved changes to your daily counts</p>
-						)}
 						<button value='back' onClick={changeDay}>
 							Past Date
 						</button>
@@ -68,6 +66,12 @@ class Dashboard extends Component {
 								changeSaved={changeSaved}
 							/>
 						))}
+						{unsavedChanges && (
+							<p className={unsavedChanges ? null : 'no-new-data'}>
+								You have unsaved changes to your daily counts
+							</p>
+						)}
+						{/* <Activities /> */}
 					</div>
 				)}
 			</UserConsumer>
