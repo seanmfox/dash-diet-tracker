@@ -9,10 +9,12 @@ class UserProvider extends Component {
 	state = {
 		user: '',
 		dayView: '',
+		weekView: '',
 		unsavedChanges: false,
 		signOut: () => this.signOut(),
 		setUser: user => this.setUser(user),
 		changeDay: e => this.changeDay(e),
+		changeWeek: e => this.changeWeek(e),
 		changeMade: () => this.changeMade(),
 		changeSaved: () => this.changeSaved()
 	};
@@ -22,6 +24,7 @@ class UserProvider extends Component {
 			this.authUser();
 		}
 		this.setCurrentDay();
+		this.setCurrentWeek();
 	};
 
 	changeMade = () => {
@@ -36,7 +39,16 @@ class UserProvider extends Component {
 		const change = e.target.value;
 		const changeType = change === 'forward' ? 86400000 : -86400000;
 		this.setState(prevState => ({
-			dayView: prevState.dayView + Number(changeType), unsavedChanges: false
+			dayView: prevState.dayView + Number(changeType),
+			unsavedChanges: false
+		}));
+	};
+
+	changeWeek = e => {
+		const change = e.target.value;
+		const changeType = change === 'forward' ? 604800000 : -604800000;
+		this.setState(prevState => ({
+			weekView: prevState.weekView + Number(changeType)
 		}));
 	};
 
@@ -44,6 +56,15 @@ class UserProvider extends Component {
 		const currentDate = new Date(Date.now());
 		const startOfDay = currentDate.setUTCHours(0, 0, 0, 0);
 		this.setState({ dayView: startOfDay.valueOf() });
+	};
+
+	setCurrentWeek = () => {
+		const currentDate = new Date(Date.now());
+		const weekBeginningDate =
+			currentDate.getUTCDate() - currentDate.getUTCDay();
+		const startOfDay = new Date(currentDate.setUTCDate(weekBeginningDate));
+		startOfDay.setUTCHours(0, 0, 0, 0);
+		this.setState({ weekView: startOfDay.valueOf() });
 	};
 
 	setUser = user => {
