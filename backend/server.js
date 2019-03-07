@@ -47,11 +47,6 @@ router.post('/usersignin/', (req, res) => {
 				token: jwt.sign(
 					{
 						userId: doc._id,
-						fname: doc.fname,
-						lname: doc.lname,
-						email: doc.email,
-						food: doc.food,
-						exercise: doc.exercise
 					},
 					process.env.SECRET_KEY
 				),
