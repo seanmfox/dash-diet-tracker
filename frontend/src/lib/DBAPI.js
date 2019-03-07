@@ -22,7 +22,7 @@ export async function authenticateUser() {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		}
-	}).then(res => res.json());
+	}).then(res => res.json()).catch(error => console.log(error));
 }
 
 export async function createFoodRecord(userId, foodData, trackDate) {
@@ -34,7 +34,7 @@ export async function createFoodRecord(userId, foodData, trackDate) {
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		},
 		body: JSON.stringify({ foodData, trackDate })
-	}).then(res => res.json())
+	}).then(res => res.json()).catch(error => console.log(error))
 }
 
 export async function updateFoodRecord(userId, foodRecordID, foodData) {
@@ -46,5 +46,5 @@ export async function updateFoodRecord(userId, foodRecordID, foodData) {
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		},
 		body: JSON.stringify({ foodData })
-	}).then(res => res.json())
+	}).then(res => res.json()).catch(error => console.log(error))
 }
