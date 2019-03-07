@@ -18,6 +18,7 @@ export async function authenticateUser() {
 	return fetch(`/api/authuser/`, {
 		method: 'GET',
 		headers: {
+			'Referrer-Policy': 'no-referrer-when-downgrade',
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		}
