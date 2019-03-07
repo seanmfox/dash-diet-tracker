@@ -29,6 +29,7 @@ export async function createFoodRecord(userId, foodData, trackDate) {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
+			'Referrer-Policy': 'no-referrer-when-downgrade',
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		},
 		body: JSON.stringify({ foodData, trackDate })
@@ -39,6 +40,7 @@ export async function updateFoodRecord(userId, foodRecordID, foodData) {
 	return fetch(`/api/users/${userId}/food/${foodRecordID}`, {
 		method: 'PATCH',
 		headers: {
+			'Referrer-Policy': 'no-referrer-when-downgrade',
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		},

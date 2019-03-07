@@ -58,7 +58,6 @@ exports.updateFoodRecord = (req, res) => {
 	const { foodData } = req.body;
 	const { userId, foodRecordId } = req.params;
 	User.findById(userId, (error, user) => {
-		console.log(error)
 		const record = user.food.id(foodRecordId);
 		record.grain = foodData.grain;
 		record.wholeGrain = foodData.wholeGrain;
