@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FoodForm from './FoodForm';
 import { UserConsumer } from './Context';
-import Activities from './Activities';
+// import Activities from './Activities';
 
 class Dashboard extends Component {
 	dailyFoodData = (user, time) => {
