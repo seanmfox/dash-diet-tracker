@@ -84,4 +84,52 @@ exports.updateFoodRecord = (req, res) => {
 	});
 };
 
+exports.createActivity = (req, res) => {
+	const { activityData } = req.body;
+	const { userId } = req.params;
+	User.findById(userId, (error, user) => {
+		user.exercise.push({
+			activityType: activityData.activityType,
+			activityDuration: activityData.activityDuration,
+			activityDate: activityData.activityDate
+		});
+		user.save(err => {
+			if (err) return res.json({ success: false, error: err });
+			return res.json({
+				success: true,
+				user: {
+					userId: user._id,
+					fname: user.fname,
+					lname: user.lname,
+					email: user.email,
+					food: user.food,
+					exercise: user.exercise
+				}
+			});
+		});
+	});
+};
+
+exports.deleteActivity = (req, res) => {
+	const { userId, activityId } = req.params;
+	User.findById(userId, (error, user) => {
+		const newActivities = user.exercise.filter(ex => ex.id !== activityId);
+		user.exercise = newActivities;
+		user.save(err => {
+			if (err) return res.json({ success: false, error: err });
+			return res.json({
+				success: true,
+				user: {
+					userId: user._id,
+					fname: user.fname,
+					lname: user.lname,
+					email: user.email,
+					food: user.food,
+					exercise: user.exercise
+				}
+			});
+		});
+	});
+};
+
 module.exports = exports;

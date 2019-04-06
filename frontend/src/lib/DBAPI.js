@@ -22,7 +22,9 @@ export async function authenticateUser() {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		}
-	}).then(res => res.json()).catch(error => console.log(error));
+	})
+		.then(res => res.json())
+		.catch(error => console.log(error));
 }
 
 export async function createFoodRecord(userId, foodData, trackDate) {
@@ -34,7 +36,9 @@ export async function createFoodRecord(userId, foodData, trackDate) {
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		},
 		body: JSON.stringify({ foodData, trackDate })
-	}).then(res => res.json()).catch(error => console.log(error))
+	})
+		.then(res => res.json())
+		.catch(error => console.log(error));
 }
 
 export async function updateFoodRecord(userId, foodRecordID, foodData) {
@@ -46,5 +50,34 @@ export async function updateFoodRecord(userId, foodRecordID, foodData) {
 			Authorization: `Bearer ${localStorage.getItem('JWT')}`
 		},
 		body: JSON.stringify({ foodData })
-	}).then(res => res.json()).catch(error => console.log(error))
+	})
+		.then(res => res.json())
+		.catch(error => console.log(error));
+}
+
+export async function addActivity(userId, activityData) {
+	return fetch(`/api/users/${userId}/activity`, {
+		method: 'POST',
+		headers: {
+			'Referrer-Policy': 'no-referrer',
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('JWT')}`
+		},
+		body: JSON.stringify({ activityData })
+	})
+		.then(res => res.json())
+		.catch(error => console.log(error));
+}
+
+export async function removeActivity(userId, activityId) {
+	return fetch(`/api/users/${userId}/activity/${activityId}`, {
+		method: 'DELETE',
+		headers: {
+			'Referrer-Policy': 'no-referrer',
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${localStorage.getItem('JWT')}`
+		}
+	})
+		.then(res => res.json())
+		.catch(error => console.log(error));
 }

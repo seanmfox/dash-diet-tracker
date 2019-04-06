@@ -13,6 +13,12 @@ const FoodSchema = new Schema({
 	fatsSweets: Number
 });
 
+const ActivitySchema = new Schema({
+	activityType: String,
+	activityDuration: Number,
+	activityDate: Date
+})
+
 const UserSchema = new Schema(
 	{
 		fname: String,
@@ -20,7 +26,7 @@ const UserSchema = new Schema(
 		email: { type: String, sparse: true, lowercase: true },
 		password: { type: String },
 		food: [FoodSchema],
-		exercise: [{}]
+		exercise: [ActivitySchema]
 	},
 	{ timestamps: true }
 );

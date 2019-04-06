@@ -15,3 +15,7 @@ table {
 .no-new-data {
   visibility: hidden;
 }
+
+.activity-form label{
+  display: block;
+}
