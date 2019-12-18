@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": { 
-    "node": "12.13.1" 
+  "engines": {
+    "node": "12.13.1"
   },
   "scripts": {
     "start": "cd backend && node server.js",
@@ -25,12 +25,12 @@
   },
   "homepage": "https://github.com/seanmfox/dash-diet-tracker#readme",
   "dependencies": {
-    "bcrypt": "^3.0.3",
+    "bcrypt": "^3.0.7",
     "concurrently": "^4.1.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.4.5",
+    "mongoose": "^5.8.1",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
