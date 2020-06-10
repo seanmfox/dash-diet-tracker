@@ -54,16 +54,16 @@ class UserProvider extends Component {
 
 	setCurrentDay = () => {
 		const currentDate = new Date(Date.now());
-		const startOfDay = currentDate.setUTCHours(0, 0, 0, 0);
+		const startOfDay = currentDate.setHours(0, 0, 0, 0);
 		this.setState({ dayView: startOfDay.valueOf() });
 	};
 
 	setCurrentWeek = () => {
 		const currentDate = new Date(Date.now());
 		const weekBeginningDate =
-			currentDate.getUTCDate() - currentDate.getUTCDay();
-		const startOfDay = new Date(currentDate.setUTCDate(weekBeginningDate));
-		startOfDay.setUTCHours(0, 0, 0, 0);
+			currentDate.getDate() - currentDate.getDay();
+		const startOfDay = new Date(currentDate.setDate(weekBeginningDate));
+		startOfDay.setHours(0, 0, 0, 0);
 		this.setState({ weekView: startOfDay.valueOf() });
 	};
 

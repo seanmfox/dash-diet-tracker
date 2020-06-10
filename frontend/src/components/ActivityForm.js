@@ -41,6 +41,7 @@ const ActivityForm = (props) => {
 							<option value='Cardio'>Cardio</option>
 							<option value='Swimming'>Swimming</option>
 							<option value='Strength'>Strength</option>
+							<option value='Biking'>Biking</option>
 						</select>
 					</label>
 					<label>

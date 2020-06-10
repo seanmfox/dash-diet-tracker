@@ -6,9 +6,11 @@ import Activities from './Activities';
 class Dashboard extends Component {
 	dailyFoodData = (user, time) => {
 		const foodData = user.food.filter(
-			log =>
-				new Date(log.recordDate).toUTCString() === new Date(time).toUTCString()
-		);
+			log => {
+				const logDate = new Date(log.recordDate)
+				const currTime = new Date(time)
+				return `${logDate.getUTCFullYear()}-${logDate.getUTCMonth()}-${logDate.getUTCDate()}` === `${currTime.getFullYear()}-${currTime.getMonth()}-${currTime.getDate()}`
+		});
 		if (foodData.length === 0) {
 			return [
 				{
@@ -41,40 +43,39 @@ class Dashboard extends Component {
 					changeMade,
 					changeSaved
 				}) => (
-					<div>
-						<button value='back' onClick={changeDay}>
-							Past Date
+						<div>
+							<button value='back' onClick={changeDay}>
+								Past Date
 						</button>
-						<button value='forward' onClick={changeDay}>
-							Future Date
+							<button value='forward' onClick={changeDay}>
+								Future Date
 						</button>
-						<h2>
-							{new Date(dayView).toLocaleDateString('en-US', {
-								timeZone: 'UTC',
-								weekday: 'long',
-								month: 'long',
-								day: 'numeric'
-							})}
-						</h2>
-						{this.dailyFoodData(user, dayView).map(set => (
-							<FoodForm
-								user={user}
-								setUser={setUser}
-								key={dayView}
-								set={set}
-								changeMade={changeMade}
-								changeSaved={changeSaved}
-							/>
-						))}
-						{unsavedChanges && (
-							<p className={unsavedChanges ? null : 'no-new-data'}>
-								You have unsaved changes to your daily counts
+							<h2>
+								{new Date(dayView).toLocaleDateString('en-US', {
+									weekday: 'long',
+									month: 'long',
+									day: 'numeric'
+								})}
+							</h2>
+							{this.dailyFoodData(user, dayView).map(set => (
+								<FoodForm
+									user={user}
+									setUser={setUser}
+									key={dayView}
+									set={set}
+									changeMade={changeMade}
+									changeSaved={changeSaved}
+								/>
+							))}
+							{unsavedChanges && (
+								<p className={unsavedChanges ? null : 'no-new-data'}>
+									You have unsaved changes to your daily counts
 							</p>
-						)}
-						<hr />
-						<Activities/>
-					</div>
-				)}
+							)}
+							<hr />
+							<Activities />
+						</div>
+					)}
 			</UserConsumer>
 		);
 	}
