@@ -36,7 +36,7 @@ class FoodItem extends Component {
       { name: 'dairy', goal: 2 },
       { name: 'meats', goal: 2 },
       { name: 'seedsLegumes', goal: 1 },
-      { name: 'fatsSweets', goal: 3 }
+      { name: 'fatsSweets', goal: 2 }
     ];
     const food = foodGoals.filter(food => food.name === category)[0];
     return food.goal;
