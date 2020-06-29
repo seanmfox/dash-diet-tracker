@@ -30,8 +30,8 @@ class FoodItem extends Component {
   setGoal = category => {
     const foodGoals = [
       { name: 'grain', goal: 1 },
-      { name: 'wholeGrain', goal: 5 },
-      { name: 'fruit', goal: 4 },
+      { name: 'wholeGrain', goal: 4 },
+      { name: 'fruit', goal: 3 },
       { name: 'veggies', goal: 6 },
       { name: 'dairy', goal: 2 },
       { name: 'meats', goal: 2 },
