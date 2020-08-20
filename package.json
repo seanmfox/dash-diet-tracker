@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/seanmfox/dash-diet-tracker#readme",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "concurrently": "^4.1.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
